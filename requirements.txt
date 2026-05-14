@@ -11,7 +11,7 @@ curl-cffi>=0.7.0
 lxml>=6.1.0
 
 # Mercado brasileiro
-python-bcb>=0.3.0
+python-bcb>=0.3.6
 
 # Processamento
 polars>=0.20.0
