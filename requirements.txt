@@ -1,17 +1,20 @@
 # Agentes e LLM
 langchain>=0.3.0
-langchain-anthropic>=0.3.0
+langchain-anthropic>=1.4.3
 langgraph>=0.2.0
-anthropic>=0.40.0
+anthropic>=0.102.0
 
 # Coleta de dados
 httpx>=0.27.0
 playwright>=1.44.0
 curl-cffi>=0.15.0
 lxml>=5.0.0
+=======
+curl-cffi>=0.7.0
+lxml>=6.1.0
 
 # Mercado brasileiro
-python-bcb>=0.3.0
+python-bcb>=0.3.6
 
 # Processamento
 polars>=0.20.0
