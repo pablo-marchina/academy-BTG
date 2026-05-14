@@ -1,0 +1,45 @@
+# Agentes e LLM
+langchain>=0.3.0
+langchain-anthropic>=0.3.0
+langgraph>=0.2.0
+anthropic>=0.40.0
+
+# Coleta de dados
+httpx>=0.27.0
+playwright>=1.44.0
+curl-cffi>=0.7.0
+lxml>=5.0.0
+
+# Mercado brasileiro
+python-bcb>=0.3.0
+
+# Processamento
+polars>=0.20.0
+pandas>=2.0.0
+numpy>=1.26.0
+scipy>=1.13.0
+scikit-learn>=1.4.0
+
+# Embeddings e vector store
+qdrant-client>=1.9.0
+sentence-transformers>=3.0.0
+
+# Storage estruturado
+sqlalchemy>=2.0.0
+
+# Configuração
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+python-dotenv>=1.0.0
+
+# Alertas
+python-telegram-bot>=21.0
+
+# Interface
+streamlit>=1.35.0
+plotly>=5.22.0
+
+# Exportação
+fpdf2>=2.7.0
+PyMuPDF>=1.24.0
+pdfplumber>=0.11.0

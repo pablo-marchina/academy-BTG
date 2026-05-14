@@ -1,0 +1,2 @@
+exclude: ["/tests/", "/venv/", "/ligaai-aula01/"]
+skips: ["B101", "B311", "B303"]

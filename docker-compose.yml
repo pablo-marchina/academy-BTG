@@ -1,0 +1,63 @@
+services:
+  app:
+    build: .
+    container_name: btg-intelligence
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - ANBIMA_CLIENT_ID=${ANBIMA_CLIENT_ID}
+      - ANBIMA_CLIENT_SECRET=${ANBIMA_CLIENT_SECRET}
+      - ANBIMA_ACCESS_TOKEN=${ANBIMA_ACCESS_TOKEN}
+      - DATE_LOOKBACK_DAYS=${DATE_LOOKBACK_DAYS:-7}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "python", "scripts/health_check.py"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    command: python main.py
+
+  dashboard:
+    build: .
+    container_name: btg-dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - DASHBOARD_PASSWORD=${DASHBOARD_PASSWORD}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import http.client; c=http.client.HTTPConnection('localhost',8501); c.request('GET','/'); assert c.getresponse().status==200"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    command: streamlit run streamlit_app.py --server.port=8501 --server.address=0.0.0.0
+
+  api:
+    build: .
+    container_name: btg-api
+    ports:
+      - "8000:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - API_KEYS=${API_KEYS}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import http.client; c=http.client.HTTPConnection('localhost',8000); c.request('GET','/health'); assert c.getresponse().status==200"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    command: uvicorn src.api.app:app --host 0.0.0.0 --port 8000

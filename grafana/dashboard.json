@@ -1,0 +1,44 @@
+{{
+  "title": "BTG Intelligence",
+  "uid": "btg-intelligence",
+  "panels": [
+    {{
+      "title": "Ofertas Coletadas por Fonte",
+      "type": "graph",
+      "targets": [{{
+        "expr": "rate(btg_ofertas_coletadas_total[5m])",
+        "legendFormat": "{{fonte}}"
+      }}]
+    }},
+    {{
+      "title": "Duracao do Pipeline",
+      "type": "heatmap",
+      "targets": [{{
+        "expr": "btg_pipeline_duration_seconds_bucket",
+        "format": "heatmap"
+      }}]
+    }},
+    {{
+      "title": "Erros por Node",
+      "type": "stat",
+      "targets": [{{
+        "expr": "btg_pipeline_errors_total"
+      }}]
+    }},
+    {{
+      "title": "Score Atual por Produto",
+      "type": "gauge",
+      "targets": [{{
+        "expr": "btg_score_atual"
+      }}]
+    }},
+    {{
+      "title": "Ultima Coleta",
+      "type": "stat",
+      "targets": [{{
+        "expr": "time() - btg_ultima_coleta_timestamp"
+      }}],
+      "format": "s"
+    }}
+  ]
+}}
