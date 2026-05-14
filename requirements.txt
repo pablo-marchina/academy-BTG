@@ -17,7 +17,7 @@ python-bcb>=0.3.0
 polars>=0.20.0
 pandas>=2.0.0
 numpy>=1.26.0
-scipy>=1.13.0
+scipy>=1.17.1
 scikit-learn>=1.4.0
 
 # Embeddings e vector store
